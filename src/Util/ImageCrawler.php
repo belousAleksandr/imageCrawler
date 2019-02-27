@@ -8,6 +8,7 @@ namespace App\Util;
 use App\Model\CrawlerRequest;
 use App\Model\ImageDownloadRequest;
 use Symfony\Component\DomCrawler\Crawler;
+use Symfony\Component\Finder\Finder;
 
 class ImageCrawler
 {
@@ -27,7 +28,7 @@ class ImageCrawler
      * @param ImageDownloader $imageDownloader
      * @param string $publicDir
      */
-    public function __construct(HttpClient $client, ImageDownloader $imageDownloader, string $publicDir)
+    public function __construct(HttpClient $client, ImageDownloader $imageDownloader, $publicDir = null)
     {
         $this->client = $client;
         $this->imageDownloader = $imageDownloader;
@@ -45,6 +46,23 @@ class ImageCrawler
             $imageDownloadRequest = new ImageDownloadRequest($crawlerRequest->getImageSettings(), $imageUrl);
             $this->imageDownloader->download($imageDownloadRequest, $this->getImagesRootDir());
         }
+    }
+
+    /**
+     * Return list of downloaded images
+     *
+     * @return array
+     */
+    public function downloadedImages(): array
+    {
+        $finder = new Finder();
+        $finder->files()->in($this->getImagesRootDir());
+        $images = [];
+        foreach ($finder as $file) {
+            $images[] = ['src' => $file->getPathname()];
+        }
+
+        return $images;
     }
 
     private function getImagesRootDir(): string

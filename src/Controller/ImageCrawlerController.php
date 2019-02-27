@@ -19,15 +19,10 @@ class ImageCrawlerController extends Controller
      */
     public function index(Request $request): Response
     {
-        $form = $this->createForm(CrawlerRequestType::class);
+        $form = $this->createForm(CrawlerRequestType::class, null, [
+            'action' => $this->generateUrl('api_upload_images'),
+            'imageListUrl' => $this->generateUrl('api_uploaded_images')]);
         $form->add('submit', SubmitType::class);
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $imageCrawler = $this->get('app.util.image_crawler');
-            $imageCrawler->downloadImages($form->getData());
-        }
 
         return $this->render('image_crawler/index.html.twig', [
             'form' => $form->createView(),

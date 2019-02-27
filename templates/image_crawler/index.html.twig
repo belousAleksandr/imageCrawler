@@ -7,3 +7,8 @@
     {{ form_widget(form) }}
     {{ form_end(form) }}
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('js/ajax-form-handler.js') }}"></script>
+{% endblock %}

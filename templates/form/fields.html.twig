@@ -1,0 +1,13 @@
+{% block crawler_request_widget %}
+    <ul class="errors"></ul>
+    {{ form_widget(form) }}
+
+    <ul class="uploaded-images"></ul>
+    <script>
+        $(document).ready(function () {
+            $('form[name="{{ form.vars.name }}"]').initUploader({
+                imageListUrl: '{{ form.vars.imageListUrl }}'
+            });
+        });
+    </script>
+{% endblock crawler_request_widget %}
