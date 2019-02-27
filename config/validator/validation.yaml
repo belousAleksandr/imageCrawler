@@ -1,0 +1,16 @@
+App\Model\CrawlerRequest:
+    properties:
+        url:
+            - NotBlank: ~
+            - Url: ~
+
+App\Model\ImageSettings:
+    properties:
+        minWidth:
+            - NotBlank: ~
+            - Range:
+                  min: 1
+        minHeight:
+            - NotBlank: ~
+            - Range:
+                  min: 1

@@ -1,0 +1,14 @@
+services:
+    app.util.image_crawler:
+        class: App\Util\ImageCrawler
+        public: true
+        arguments: ['@App\Util\HttpClient', '@App\Util\ImageDownloader', '%kernel.root_dir%/../public/']
+
+    App\Util\HttpClient:
+        class: App\Util\HttpClient
+        public: true
+
+    App\Util\ImageDownloader:
+        class: App\Util\ImageDownloader
+        arguments: ['@App\Util\HttpClient', '@event_dispatcher']
+        public: true
