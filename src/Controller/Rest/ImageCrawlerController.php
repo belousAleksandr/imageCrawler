@@ -14,10 +14,10 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @Rest\Route("/api")
- * Class ImageUploaderController
+ * Class ImageCrawlerController
  * @package App\Controller\Rest
  */
-class ImageUploaderController extends AbstractFOSRestController
+class ImageCrawlerController extends AbstractFOSRestController
 {
 
     /**
